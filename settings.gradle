@@ -1,0 +1,9 @@
+rootProject.name = 'spring-cloud-demo'
+
+include 'HupovipBase:core'
+findProject(':HupovipBase:core')?.name = 'core'
+include 'app-1'
+findProject(':app-1')?.name = 'app-1'
+include 'app-2'
+findProject(':app-2')?.name = 'app-2'
+

@@ -1,0 +1,16 @@
+.idea
+.gradle
+*/build
+*/out
+classes
+*.iml
+**/build
+**/out
+**/**/out
+out
+rebel.xml
+application.*
+application-local.*
+application-prod.*
+application.log*
+.DS_Store

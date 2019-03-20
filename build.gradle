@@ -1,0 +1,69 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+        springCloudVersion = 'Finchley.RELEASE'
+        gson_version = "2.7"
+        rxjava_version = "1.2.3"
+        apache_commons_io_version = "1.3.2"
+        apache_commons_lang3_version = "3.4"
+        jsoup_version = "1.10.2"
+        json_version = "20160810"
+        redisson_version = "3.5.5"
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = 1.8
+    //archivesBaseName='hp-mall'
+
+    repositories {
+        mavenCentral()
+        maven{
+            url "https://nexus.hupovip.cn/repository/maven-public/"
+        }
+    }
+
+    dependencies {
+        compile('org.springframework.boot:spring-boot-starter-aop')
+        compile('org.springframework.boot:spring-boot-starter-mail')
+        compile('org.springframework.boot:spring-boot-starter-web')
+        compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+        compile('org.springframework.boot:spring-boot-configuration-processor')
+        compile('org.springframework.boot:spring-boot-starter-quartz')
+        compile('org.springframework.boot:spring-boot-starter-actuator')
+//        compile 'com.alibaba.cloud:spring-cloud-starter-acm:1.0.7'
+        compile('org.springframework.cloud:spring-cloud-starter-config')
+        compile('org.springframework.cloud:spring-cloud-starter-consul-discovery')
+        compile('org.springframework.cloud:spring-cloud-starter-feign:1.4.6.RELEASE')
+        compile('org.springframework.cloud:spring-cloud-starter-hystrix:1.4.6.RELEASE')
+        compile('org.springframework.cloud:spring-cloud-starter-sleuth:2.0.3.RELEASE')
+        compile('org.springframework.cloud:spring-cloud-sleuth-zipkin:2.0.3.RELEASE')
+
+        compile("org.elasticsearch:elasticsearch:6.3.2")
+
+        runtime('org.springframework.boot:spring-boot-devtools')
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+
+        compile 'org.projectlombok:lombok:1.18.2'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+    jar { enabled = true }
+}
